@@ -21,6 +21,12 @@ while [ "$1" != "" ]; do
     shift
 done
 
+if [ -f "/proc/version" ]; then
+    python_app="./.venv/bin/python"
+else
+    python_app="./.venv/Scripts/python.exe"
+fi
+
 perform_task() {
   rm Cache/reload
   if $is_need_install_deps; then
@@ -29,7 +35,7 @@ perform_task() {
   fi
 
   echo -e "${GREEN}[Bash] Starting the server...${NC}"
-  ".venv/Scripts/python.exe" manage.py runserver --noreload #| tee /dev/fd/2 | tail -1
+  ${python_app} manage.py runserver --noreload #| tee /dev/fd/2 | tail -1
 }
 
 while true; do
