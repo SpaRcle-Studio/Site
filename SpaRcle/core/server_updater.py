@@ -12,7 +12,7 @@ def pull_changes():
 
     # repo.is_dirty(untracked_files=True) or
     if repo.head.commit != origin.refs.master.commit:
-        print(colored('Server repository has changes, reload...', 'yellow'))
+        print(colored('The server repository has changes, reload...', 'yellow'))
         origin.pull()
         restart_server()
 
