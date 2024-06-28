@@ -24,7 +24,7 @@ while [ "$1" != "" ]; do
     shift
 done
 
-if [ -f "/proc/version" ] && ![ "$OSTYPE" = "msys" ] && ![ "$OSTYPE" = "cygwin" ]; then
+if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin" ]; then
     python_app="./.venv/bin/python"
 else
     python_app="./.venv/Scripts/python.exe"
