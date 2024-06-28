@@ -18,11 +18,11 @@ if [ -f "/proc/version" ]; then
     echo -e "${GREEN}Creating python venv...${NC}"
     python -m venv .venv
 
-    source .venv/bin/activate
-    python_app = "python"
+    python_app = ".venv/bin/python"
 else
     echo -e "${GREEN}Creating python venv...${NC}"
     python -m venv .venv
+    
     python_app = "./.venv/Scripts/python.exe"
 fi
 
