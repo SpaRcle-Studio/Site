@@ -9,7 +9,7 @@ python -m pip install --upgrade pip
 echo -e "${GREEN}Installing python pipenv...${NC}"
 python -m pip install pipenv
 
-python_app = ""
+python_app=""
 
 if [ -f "/proc/version" ]; then
     echo -e "${GREEN}Installing python3.10-venv...${NC}"
@@ -18,12 +18,12 @@ if [ -f "/proc/version" ]; then
     echo -e "${GREEN}Creating python venv...${NC}"
     python -m venv .venv
 
-    python_app = ".venv/bin/python"
+    python_app="./.venv/bin/python"
 else
     echo -e "${GREEN}Creating python venv...${NC}"
     python -m venv .venv
-    
-    python_app = "./.venv/Scripts/python.exe"
+
+    python_app="./.venv/Scripts/python.exe"
 fi
 
 echo -e "${GREEN}Installing python pipenv...${NC}"
