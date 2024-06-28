@@ -11,7 +11,7 @@ python -m pip install pipenv
 
 python_app=""
 
-if [ -f "/proc/version" ]; then
+if [ -f "/proc/version" ] && ![ "$OSTYPE" = "msys" ] && ![ "$OSTYPE" = "cygwin" ]; then
     echo -e "${GREEN}Installing python3.10-venv...${NC}"
     sudo apt install python3.10-venv --yes
 

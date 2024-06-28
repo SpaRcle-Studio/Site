@@ -14,6 +14,9 @@ while [ "$1" != "" ]; do
         --nodeps )
             is_need_install_deps=false
             ;;
+        --debug )
+            export DJANGO_DEBUG=True
+            ;;
         * )
             echo "[Bash] Invalid option: $1" >&2
             ;;
@@ -21,7 +24,7 @@ while [ "$1" != "" ]; do
     shift
 done
 
-if [ -f "/proc/version" ]; then
+if [ -f "/proc/version" ] && ![ "$OSTYPE" = "msys" ] && ![ "$OSTYPE" = "cygwin" ]; then
     python_app="./.venv/bin/python"
 else
     python_app="./.venv/Scripts/python.exe"
