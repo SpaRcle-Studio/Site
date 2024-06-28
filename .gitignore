@@ -7,3 +7,4 @@
 /Core/__pycache__/*.pyc
 *.pyc
 /.idea
+/Cache

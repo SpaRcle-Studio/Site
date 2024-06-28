@@ -9,5 +9,5 @@ class SpaRcleConfig(AppConfig):
     name = 'SpaRcle'
 
     def ready(self):
-        print(colored('Initializing application...', 'green'))
+        print(colored('[Server] Initializing application...', 'green'))
         server_updater.run_server_updater()

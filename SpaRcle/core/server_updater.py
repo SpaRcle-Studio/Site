@@ -3,6 +3,7 @@ import git
 import time
 import os
 import threading
+import signal
 
 
 def pull_changes():
@@ -12,20 +13,27 @@ def pull_changes():
 
     # repo.is_dirty(untracked_files=True) or
     if repo.head.commit != origin.refs.master.commit:
-        print(colored('The server repository has changes, reload...', 'yellow'))
+        print(colored('[Server] The server repository has changes!', 'yellow'))
         origin.pull()
         restart_server()
 
 
 def restart_server():
-    print(colored('Restarting server...', 'yellow'))
-    exit(100)
+    print(colored('[Server] Restarting the server...', 'yellow'))
+
+    if not os.path.exists(os.getcwd() + '/Cache'):
+        os.makedirs(os.getcwd() + '/Cache')
+
+    with open(os.getcwd() + '/Cache/reload', 'w') as reload:
+        reload.close()
+
+    os.kill(os.getpid(), signal.SIGINT)
 
 
 def changes_checker():
     while True:
         pull_changes()
-        time.sleep(1)
+        time.sleep(5)
 
 
 def run_server_updater():

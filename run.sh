@@ -15,30 +15,36 @@ while [[ "$1" != "" ]]; do
             is_need_install_deps=false
             ;;
         * )
-            echo "Invalid option: $1" >&2
+            echo "[Bash] Invalid option: $1" >&2
             ;;
     esac
     shift
 done
 
 perform_task() {
+  rm Cache/reload
   if $is_need_install_deps; then
-    echo -e "${GREEN}Initalizing the server dependencies...${NC}"
+    echo -e "${GREEN}[Bash] Initalizing the server dependencies...${NC}"
     sh install.sh
   fi
 
-  echo -e "${GREEN}Starting the server...${NC}"
-  ".venv/Scripts/python.exe" manage.py runserver
+  echo -e "${GREEN}[Bash] Starting the server...${NC}"
+  ".venv/Scripts/python.exe" manage.py runserver --noreload #| tee /dev/fd/2 | tail -1
 }
 
-perform_task
+for ((;;)) do
+  perform_task
 
-if [ $? -eq 100 ]; then
-    echo -e "${GREEN}Restarting the server...${NC}"
-    is_need_install_deps=true
-    perform_task
-fi
+  echo -e "${RED}[Bash] The server was closed!${NC}"
 
-echo -e "${RED}Server closed. Press Ctrl + C to exit...${NC}"
+  if [ -e "Cache/reload" ]; then
+      echo -e "${GREEN}[Bash] Restarting the server...${NC}"
+      is_need_install_deps=true
+  else
+      break
+  fi
+done
+
+echo -e "${RED}[Bash] Press Ctrl + C to exit...${NC}"
 
 sleep 1d
