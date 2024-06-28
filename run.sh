@@ -7,7 +7,7 @@ NC='\033[0m' # No Color
 is_need_install_deps=true
 
 # Обработка аргументов командной строки
-while [[ "$1" != "" ]]; do
+while (( "$1" != "" )); do
     case $1 in
         --help )    
             ;;
