@@ -9,6 +9,10 @@ python -m pip install --upgrade pip
 echo -e "${GREEN}Installing python pipenv...${NC}"
 python -m pip install pipenv
 
+if [ "$OSTYPE" = "linux-gnu" ]; then
+    sudo apt install python3.10-venv
+fi
+
 echo -e "${GREEN}Creating python venv...${NC}"
 python -m venv .venv
 
