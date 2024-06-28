@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from termcolor import colored
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,8 +28,10 @@ SECRET_KEY = 'django-insecure-4rr^q^==oe-g(h5h4rfbofl%e3^g5=w4&%l!(_macreg02*c9p
 DEBUG = bool(os.getenv('DJANGO_DEBUG', False))
 
 if DEBUG:
+    print(colored('[Server] Debug mode!', 'blue'))
     ALLOWED_HOSTS = []
 else:
+    print(colored('[Server] Release mode!', 'blue'))
     ALLOWED_HOSTS = ['sparcles.dev', '127.0.0.1']
 
 
