@@ -5,3 +5,5 @@
 /Site/__pycache__/*.pyc
 /Site/__pycache__
 /Core/__pycache__/*.pyc
+*.pyc
+/.idea
