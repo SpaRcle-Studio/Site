@@ -32,7 +32,7 @@ perform_task() {
   ".venv/Scripts/python.exe" manage.py runserver --noreload #| tee /dev/fd/2 | tail -1
 }
 
-for ((;;)) do
+while true; do
   perform_task
 
   echo -e "${RED}[Bash] The server was closed!${NC}"
