@@ -1,0 +1,6 @@
+/db.sqlite3
+/Pipfile
+/Pipfile.lock
+/.venv
+/Site/__pycache__/*.pyc
+/Site/__pycache__
