@@ -31,7 +31,7 @@ if DEBUG:
     print(colored('[Server] Debug mode!', 'blue'))
     ALLOWED_HOSTS = []
 else:
-    print(colored('[Server] Release mode!', 'blue'))
+    print(colored('[Server] Production mode!', 'blue'))
     ALLOWED_HOSTS = ['sparcles.dev', '127.0.0.1']
 
 

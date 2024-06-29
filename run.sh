@@ -26,32 +26,38 @@ done
 
 if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin" ]; then
     python_app="./.venv/bin/python"
+    if $DJANGO_DEBUG; then
+        sudo /etc/init.d/nginx start
+    fi
 else
     python_app="./.venv/Scripts/python.exe"
 fi
 
 perform_task() {
-  rm Cache/reload
-  if $is_need_install_deps; then
-    echo -e "${GREEN}[Bash] Initalizing the server dependencies...${NC}"
-    sh install.sh
-  fi
+    if [ -e "Cache/reload" ]; then
+        rm Cache/reload
+    fi
 
-  echo -e "${GREEN}[Bash] Starting the server...${NC}"
-  ${python_app} manage.py runserver --noreload #| tee /dev/fd/2 | tail -1
+    if $is_need_install_deps; then
+        echo -e "${GREEN}[Bash] Initalizing the server dependencies...${NC}"
+        sh install.sh
+    fi
+
+    echo -e "${GREEN}[Bash] Starting the server...${NC}"
+    ${python_app} manage.py runserver --noreload #| tee /dev/fd/2 | tail -1
 }
 
 while true; do
-  perform_task
+    perform_task
 
-  echo -e "${RED}[Bash] The server was closed!${NC}"
+    echo -e "${RED}[Bash] The server was closed!${NC}"
 
-  if [ -e "Cache/reload" ]; then
-      echo -e "${GREEN}[Bash] Restarting the server...${NC}"
-      is_need_install_deps=true
-  else
-      break
-  fi
+    if [ -e "Cache/reload" ]; then
+        echo -e "${GREEN}[Bash] Restarting the server...${NC}"
+        is_need_install_deps=true
+    else
+        break
+    fi
 done
 
 echo -e "${RED}[Bash] Press Ctrl + C to exit...${NC}"

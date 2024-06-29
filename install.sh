@@ -15,6 +15,9 @@ if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin
     echo -e "${GREEN}Installing python3.10-venv...${NC}"
     sudo apt install python3.10-venv --yes
 
+    echo -e "${GREEN}Installing nginx...${NC}"
+    sudo sudo apt-get install nginx --yes
+
     echo -e "${GREEN}Creating python venv...${NC}"
     python -m venv .venv
 
