@@ -19,7 +19,7 @@ if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin
     sudo apt-get install libssl1.1 --yes
 
     echo -e "${GREEN}Installing nginx...${NC}"
-    sudo sudo apt-get install nginx --yes
+    sudo apt-get install nginx --yes
 
     echo -e "${GREEN}Creating python venv...${NC}"
     python -m venv .venv
@@ -37,6 +37,9 @@ ${python_app} -m pip install pipenv
 
 echo -e "${GREEN}Installing python GitPython...${NC}"
 ${python_app} -m pip install GitPython
+
+echo -e "${GREEN}Installing python uwsgi...${NC}"
+${python_app} -m pip install uwsgi
 
 echo -e "${GREEN}Installing python termcolor...${NC}"
 ${python_app} -m pip install termcolor

@@ -29,6 +29,8 @@ if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin
     if !($DJANGO_DEBUG); then
         cho -e "${GREEN}[Bash] Starting nginx...${NC}"
         sudo /etc/init.d/nginx start
+		
+		    ${python_app} -m uwsgi --http :8000 --module Site.wsgi
     fi
 else
     python_app="./.venv/Scripts/python.exe"
@@ -45,7 +47,7 @@ perform_task() {
     fi
 
     echo -e "${GREEN}[Bash] Starting the server...${NC}"
-    ${python_app} manage.py runserver --noreload #| tee /dev/fd/2 | tail -1
+    ${python_app} manage.py runserver --noreload 
 }
 
 while true; do
