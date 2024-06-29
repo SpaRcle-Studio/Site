@@ -1,4 +1,6 @@
-mkdir .venv
+if ! [ -e ".venv" ]; then
+  mkdir .venv
+fi
 
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
