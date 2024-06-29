@@ -7,5 +7,7 @@ from django.http import HttpResponse
 
 
 def home(request):
-    context = {}
+    context = {
+        'title': 'SpaRcle Studio'
+    }
     return render(request, 'home.html', context)
