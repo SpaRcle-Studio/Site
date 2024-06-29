@@ -6,6 +6,7 @@ NC='\033[0m' # No Color
 
 is_need_install_deps=true
 is_debug=false
+is_debug_prod=false
 is_gunicorn_active=false
 
 # Обработка аргументов командной строки
@@ -19,6 +20,10 @@ while [ "$1" != "" ]; do
         --debug )
             export DJANGO_DEBUG=True
             is_debug=true
+            ;;
+        --debug_prod )
+            export DJANGO_DEBUG=True
+            is_debug_prod=true
             ;;
         * )
             echo "[Bash] Invalid option: $1" >&2
@@ -35,7 +40,7 @@ find_python_and_setup_gunicorn() {
 
       python_app="./.venv/bin/python"
 
-      if [ "$is_debug" = false ]; then
+      if [ "$is_debug" = false ] || [ "$is_debug_prod" = true ]; then
           is_gunicorn_active=true
           echo -e "${GREEN}[Bash] Starting gunicorn...${NC}"
           sudo /etc/init.d/nginx start
