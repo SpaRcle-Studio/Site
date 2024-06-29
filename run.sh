@@ -38,7 +38,7 @@ find_python_and_setup_nginx() {
           echo -e "${GREEN}[Bash] Starting nginx...${NC}"
           sudo /etc/init.d/nginx start
 
-          ${python_app} -m uwsgi --http :8000 --module Site.wsgi
+          ${python_app} -m gunicorn --bind 0.0.0.0:8000 Site.wsgi
       fi
   else
       echo -e "${GREEN}[Bash] Use windows python...${NC}"

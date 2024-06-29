@@ -40,8 +40,11 @@ ${python_app} -m pip install pipenv
 echo -e "${GREEN}Installing python GitPython...${NC}"
 ${python_app} -m pip install GitPython
 
-echo -e "${GREEN}Installing python uwsgi...${NC}"
-${python_app} -m pip install uwsgi
+echo -e "${GREEN}Installing python wheel...${NC}"
+${python_app} -m pip install wheel
+
+echo -e "${GREEN}Installing python gunicorn...${NC}"
+${python_app} -m pip install gunicorn
 
 echo -e "${GREEN}Installing python termcolor...${NC}"
 ${python_app} -m pip install termcolor
