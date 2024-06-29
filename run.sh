@@ -24,21 +24,25 @@ while [ "$1" != "" ]; do
     shift
 done
 
-if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin" ]; then
-    echo -e "${GREEN}[Bash] Use linux python...${NC}"
+find_python_and_setup_nginx() {
+  echo -e "${GREEN}[Bash] Try to find python...${NC}"
 
-    python_app="./.venv/bin/python"
-    
-    if !($DJANGO_DEBUG); then
-        echo -e "${GREEN}[Bash] Starting nginx...${NC}"
-        sudo /etc/init.d/nginx start
-		
-		    ${python_app} -m uwsgi --http :8000 --module Site.wsgi
-    fi
-else
-    echo -e "${GREEN}[Bash] Use windows python...${NC}"
-    python_app="./.venv/Scripts/python.exe"
-fi
+  if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin" ]; then
+      echo -e "${GREEN}[Bash] Use linux python...${NC}"
+
+      python_app="./.venv/bin/python"
+
+      if !($DJANGO_DEBUG); then
+          echo -e "${GREEN}[Bash] Starting nginx...${NC}"
+          sudo /etc/init.d/nginx start
+
+          ${python_app} -m uwsgi --http :8000 --module Site.wsgi
+      fi
+  else
+      echo -e "${GREEN}[Bash] Use windows python...${NC}"
+      python_app="./.venv/Scripts/python.exe"
+  fi
+}
 
 perform_task() {
     if [ -e "Cache/reload" ]; then
@@ -49,6 +53,8 @@ perform_task() {
         echo -e "${GREEN}[Bash] Initalizing the server dependencies...${NC}"
         sh install.sh
     fi
+
+    find_python_and_setup_nginx
 
     echo -e "${GREEN}[Bash] Starting the server...${NC}"
     ${python_app} manage.py runserver --noreload 
