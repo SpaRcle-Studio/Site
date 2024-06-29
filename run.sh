@@ -5,7 +5,7 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
 is_need_install_deps=true
-export DJANGO_DEBUG=False
+is_debug=false
 
 # Обработка аргументов командной строки
 while [ "$1" != "" ]; do
@@ -17,6 +17,7 @@ while [ "$1" != "" ]; do
             ;;
         --debug )
             export DJANGO_DEBUG=True
+            is_debug=true
             ;;
         * )
             echo "[Bash] Invalid option: $1" >&2
@@ -33,7 +34,7 @@ find_python_and_setup_nginx() {
 
       python_app="./.venv/bin/python"
 
-      if !${DJANGO_DEBUG}; then
+      if [ "$is_debug" = false ]; then
           echo -e "${GREEN}[Bash] Starting nginx...${NC}"
           sudo /etc/init.d/nginx start
 
