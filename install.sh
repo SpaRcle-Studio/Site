@@ -15,6 +15,9 @@ if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin
     echo -e "${GREEN}Installing python3.10-venv...${NC}"
     sudo apt install python3.10-venv --yes
 
+    echo -e "${GREEN}Installing libssl1.1...${NC}"
+    sudo apt-get install libssl1.1 --yes
+
     echo -e "${GREEN}Installing nginx...${NC}"
     sudo sudo apt-get install nginx --yes
 
