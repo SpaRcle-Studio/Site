@@ -49,6 +49,9 @@ ${python_app} -m pip install gunicorn
 echo -e "${GREEN}Installing python termcolor...${NC}"
 ${python_app} -m pip install termcolor
 
+echo -e "${GREEN}Installing python supervisor...${NC}"
+${python_app} -m pip install supervisor
+
 echo -e "${GREEN}Installing python django-admin...${NC}"
 ${python_app} -m pip install django-admin
 
