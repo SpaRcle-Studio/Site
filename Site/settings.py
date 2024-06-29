@@ -29,11 +29,10 @@ DEBUG = bool(os.getenv('DJANGO_DEBUG', False))
 
 if DEBUG:
     print(colored('[Server] Debug mode!', 'blue'))
-    ALLOWED_HOSTS = []
 else:
     print(colored('[Server] Production mode!', 'blue'))
-    ALLOWED_HOSTS = ['sparcles.dev', '127.0.0.1']
 
+ALLOWED_HOSTS = ['sparcles.dev', '127.0.0.1']
 
 # Application definition
 
