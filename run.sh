@@ -26,7 +26,7 @@ done
 
 if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin" ]; then
     python_app="./.venv/bin/python"
-    if $DJANGO_DEBUG; then
+    if !($DJANGO_DEBUG); then
         sudo /etc/init.d/nginx start
     fi
 else
