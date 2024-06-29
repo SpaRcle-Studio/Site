@@ -31,6 +31,7 @@ def restart_server():
 
 
 def changes_checker():
+    print(colored('[Server] Server updater successfully started!', 'blue'))
     while True:
         pull_changes()
         time.sleep(5)

@@ -6,6 +6,7 @@ NC='\033[0m' # No Color
 
 is_need_install_deps=true
 is_debug=false
+is_gunicorn_active=false
 
 # Обработка аргументов командной строки
 while [ "$1" != "" ]; do
@@ -26,7 +27,7 @@ while [ "$1" != "" ]; do
     shift
 done
 
-find_python_and_setup_nginx() {
+find_python_and_setup_gunicorn() {
   echo -e "${GREEN}[Bash] Try to find python...${NC}"
 
   if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin" ]; then
@@ -35,7 +36,8 @@ find_python_and_setup_nginx() {
       python_app="./.venv/bin/python"
 
       if [ "$is_debug" = false ]; then
-          echo -e "${GREEN}[Bash] Starting nginx...${NC}"
+          is_gunicorn_active=true
+          echo -e "${GREEN}[Bash] Starting gunicorn...${NC}"
           sudo /etc/init.d/nginx start
 
           ${python_app} -m gunicorn --bind 0.0.0.0:8000 Site.wsgi
@@ -56,10 +58,13 @@ perform_task() {
         sh install.sh
     fi
 
-    find_python_and_setup_nginx
-
     echo -e "${GREEN}[Bash] Starting the server...${NC}"
-    ${python_app} manage.py runserver --noreload 
+
+    find_python_and_setup_gunicorn
+
+    if [ "$is_gunicorn_active" = false ]; then
+        ${python_app} manage.py runserver --noreload
+    fi
 }
 
 while true; do
