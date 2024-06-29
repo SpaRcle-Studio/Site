@@ -25,14 +25,18 @@ while [ "$1" != "" ]; do
 done
 
 if [ -f "/proc/version" ] && ! [ "$OSTYPE" = "msys" ] && ! [ "$OSTYPE" = "cygwin" ]; then
+    echo -e "${GREEN}[Bash] Use linux python...${NC}"
+
     python_app="./.venv/bin/python"
+    
     if !($DJANGO_DEBUG); then
-        cho -e "${GREEN}[Bash] Starting nginx...${NC}"
+        echo -e "${GREEN}[Bash] Starting nginx...${NC}"
         sudo /etc/init.d/nginx start
 		
 		    ${python_app} -m uwsgi --http :8000 --module Site.wsgi
     fi
 else
+    echo -e "${GREEN}[Bash] Use windows python...${NC}"
     python_app="./.venv/Scripts/python.exe"
 fi
 
