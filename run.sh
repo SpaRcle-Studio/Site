@@ -40,8 +40,8 @@ find_python_and_setup_gunicorn() {
           echo -e "${GREEN}[Bash] Starting gunicorn...${NC}"
           sudo /etc/init.d/nginx start
 
-          #${python_app} -m gunicorn --bind 0.0.0.0:8000 Site.wsgi
-          ${python_app} -m gunicorn --bind unix:/run/gunicorn.sock Site.wsgi
+          ${python_app} -m gunicorn --bind 0.0.0.0:8000 Site.wsgi
+          #${python_app} -m gunicorn --bind unix:/run/gunicorn.sock Site.wsgi
       fi
   else
       echo -e "${GREEN}[Bash] Use windows python...${NC}"
