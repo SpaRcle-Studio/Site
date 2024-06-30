@@ -32,7 +32,7 @@ if DEBUG:
 else:
     print(colored('[Server] Production mode!', 'blue'))
 
-ALLOWED_HOSTS = ['sparcles.dev', '127.0.0.1']
+ALLOWED_HOSTS = ['sparcles.dev', '127.0.0.1', '0.0.0.0', '217.151.231.215']
 
 # Application definition
 
